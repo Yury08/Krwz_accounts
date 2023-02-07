@@ -1,2 +1,2 @@
-# krwz_accounts
+# Krwz_accounts
 Сайт по продажи игровых аккаунтов
