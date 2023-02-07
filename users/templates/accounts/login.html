@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+{% block title %}
+    Log-in
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="module">
+            {% if form.errors %}
+                <p>Ваше имя пользователя и пароль не совпадали. Пожалуйста, попробуйте снова.</p>
+            {% else %}
+                <p>Пожалуйста, используйте следующую форму для входа в систему:</p>
+            {% endif %}
+            <div class="form-signin">
+            <form action="{% url 'users:login' %}" method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}" />
+                <p><input class="btn btn-danger" type="submit" value="Log-in"></p>
+            </form>
+                <p>Если не аккаунта, то <a href="{% url 'users:register' %}">зарегистрируйтесь</a></p>
+            </div>
+
+    </div>
+</div>
+{% endblock %}

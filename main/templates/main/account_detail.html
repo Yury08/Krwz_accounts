@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+        <div class="product__list_header mb-5 mt-3">
+            <h1>{{ product.title }}</h1>
+        </div>
+        <div class="list__items">
+            <p>Для {{ product }} все изображения</p>
+            {% if images %}
+                {% for image in images %}
+                    <img src="{{ image.image.url }}" alt="">
+                {% endfor %}
+            {% else %}
+                <p>Пока нет изображений</p>
+            {% endif %}
+        </div>
+    <a href="{% url 'main:order_form' product.id %}" class="btn btn-outline-danger">Купить</a>
+</div>
+{% endblock %}

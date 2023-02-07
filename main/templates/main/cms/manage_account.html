@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+    Мои аккаунты выставленные на продажу
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="cms__heading">Мои аккаунты выставленные на продажу</h1>
+    <div class="module">
+        {% for account in object_list %}
+        <div class="course-info">
+            <h3>{{ account.title }}</h3>
+            <p>
+                <a href="{% url 'main:update_account' account.id %}">Edit</a>
+                <a href="{% url 'main:delete_account' account.id %}">Delete</a>
+                <a href="{% url 'main:image_product_update' account.id %}">Images</a>
+            </p>
+        </div>
+        {% empty %}
+            <p class="cms__empty">Пока у тебя не выствленны аккаунты на продажу</p>
+        {% endfor %}
+        <p>
+            <a href="{% url 'main:create_account' %}" class="btn btn-outline-info">Выствить аккаунт на продажу</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

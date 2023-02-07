@@ -1,0 +1,53 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %} {{ category.name }} {% else %}Accounts{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div id="sidebar">
+        <ul class="sidebar__list">
+            <div class="sidebar__list_all">
+                <li {% if not category %}class=""{% endif %}>
+                    <a class="sidebar__list_link" href="{% url 'main:category_list' %}">All</a>
+                </li>
+            </div>
+            {% for c in categories %}
+            <div class="sidebar__item">
+                <li {% if category.slug == c.slug %}  {% endif %}>
+                    <a class="sidebar__list_link" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            </div>
+            {% endfor %}
+
+        </ul>
+    </div>
+    <div id="main" class="product-list">
+        
+        <div class="product__list_header mb-5 mt-3">
+            <h1>{% if category %}{{ category.name }}{% else %}Accounts{% endif %}</h1>
+        </div>
+        <div class="list__items">
+            {% for product in all_products %}
+            <div class="item_detail mb-2 mt-2">
+                <a href="#" class="item">
+                    <a class="link" href="#">
+                       {% if user.image %}
+                            <img src="{{ user.image }}" alt="mdo" width="55" height="55" class="rounded-circle">
+                       {% else %}
+                            <img src="{% static 'image/default.png' %}" alt="mdo" width="55" height="55" class="rounded-circle">
+                        {% endif %}
+                    </a>
+                    <a class="title" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                    <p class="region me-5">{{ product.region }}</p>
+                    <p class="overview">{{ product.overview }}</p>
+                    <p class="price">{{ product.price }}</p>
+                </a>
+            </div>
+            <br>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
